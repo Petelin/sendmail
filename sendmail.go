@@ -3,7 +3,6 @@ package sendmail
 import (
 	"os"
 	"os/exec"
-	"log"
 	"fmt"
 	"strings"
 )
@@ -29,4 +28,5 @@ func SendMail(from, name, to, title, body string) error{
 	if err != nil{
 		return err
 	}
+	return nil
 }

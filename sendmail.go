@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func SendMail(from, name, to, title, body string){
+func SendMail(from, name, to, title, body string) error{
 	args := []string{
 		"-f",
 		from,
@@ -23,10 +23,10 @@ func SendMail(from, name, to, title, body string){
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 	if err := cmd.Start(); err != nil {
-		log.Fatalln("Cannot start subprocess, exit with err:", err)
+		return err
 	}
 	err := cmd.Wait()
 	if err != nil{
-		log.Println(err)
+		return err
 	}
 }

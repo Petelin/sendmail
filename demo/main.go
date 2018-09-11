@@ -1,7 +1,11 @@
 package main
 
-import "github.com/petelin/sendmail"
+import (
+	"github.com/petelin/sendmail"
+	"fmt"
+)
 
 func main() {
-	sendmail.SendMail("Robot@notify.com","[Robot]", "859598732@qq.com", "this is title", "this is body\nand a new line")
+	err := sendmail.SendMail("x@x.com","Robot", "859598732@qq.com", "this is title中文测试", "this is body\n<h1>内容</h1>")
+	fmt.Println(err)
 }

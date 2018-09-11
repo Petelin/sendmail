@@ -14,14 +14,13 @@ func SendMail(from, name, to, title, body string) error{
 		from,
 		"-F",
 		name,
-		"-o",
-		"message-content-type=html",
 		to,
 	}
 	cmd := exec.Command("sendmail", args...)
 
 	baseTitle := "=?UTF-8?B?" + base64.StdEncoding.EncodeToString([]byte(title)) +"?="
-	input := fmt.Sprintf("Subject:%s\n\n%s", baseTitle, body)
+	input := fmt.Sprintf("Subject:%s\nContent-Type:text/html\n\n%s", baseTitle, fmt.Sprintf("<html><body>%s</body></html>", body))
+	fmt.Println(input)
 	cmd.Stdin = strings.NewReader(input)
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
